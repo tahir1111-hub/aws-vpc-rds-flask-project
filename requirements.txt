@@ -1,2 +1,2 @@
-flask==2.3.3
+flask==2.2.5
 mysql-connector-python==8.1.0
