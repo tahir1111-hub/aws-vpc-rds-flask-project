@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask MySQL Connection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        ul {
+            background-color: #f5f5f5;
+            padding: 15px 30px;
+            border-radius: 5px;
+        }
+        li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Flask MySQL Connection Status</h1>
+    
+    {% if connected %}
+        <p class="success">✅ Successfully connected to MySQL database!</p>
+        
+        <h2>Available Databases:</h2>
+        {% if databases %}
+            <ul>
+                {% for db in databases %}
+                    <li>{{ db }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No databases found.</p>
+        {% endif %}
+    {% else %}
+        <p class="error">❌ Failed to connect to MySQL database</p>
+        <p>Error: {{ error }}</p>
+    {% endif %}
+</body>
+</html>
