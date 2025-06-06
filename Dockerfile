@@ -22,4 +22,4 @@ COPY app_docker.py app.py
 EXPOSE 5000
 
 # Command to run the application
-CMD ["python", "app.py"]
+CMD ["python", "app.py", "--host=0.0.0.0"]
