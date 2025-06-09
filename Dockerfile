@@ -1,41 +1,25 @@
-# Use official Python slim image
 FROM python:3.9-slim
 
-# Set environment variables for clean and optimized installs
-ENV DEBIAN_FRONTEND=noninteractive \
-    PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1
-
-# Set working directory
 WORKDIR /app
 
-# Install system dependencies (if needed for MySQL clients)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
-    libmariadb-dev \
- && rm -rf /var/lib/apt/lists/*
-
-# Copy requirements and install Python dependencies
+# Copy requirements first for better caching
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the rest of the codebase
+# Copy the rest of the application
 COPY . .
 
-# Overwrite app.py with Docker-specific version
-COPY app_docker.py app.py
-
-# Set default environment variables (can be overridden)
+# Set environment variables for MySQL connection (these will be overridden at runtime)
 ENV MYSQL_HOST=localhost \
     MYSQL_USER=flaskuser \
     MYSQL_PASSWORD=your_password_here \
     MYSQL_PORT=3306
 
-# Expose the app's port
+# Copy the Docker-ready app.py
+COPY app_docker.py app.py
+
+# Expose the port the app runs on
 EXPOSE 5000
 
-# Set the entry point to Python running your app
-ENTRYPOINT ["python", "app.py"]
-
-# Default arguments (can be overridden at runtime)
-CMD ["--host=0.0.0.0"]
+# Command to run the application
+CMD ["python", "app.py", "--host=0.0.0.0"]
