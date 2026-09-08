@@ -39,7 +39,7 @@ A hands-on AWS project demonstrating how to deploy a Flask application on an EC2
                   EC2 Monitoring
 
 
-🚀 Technologies Used
+🚀## Technologies Used
 AWS VPC
 Amazon EC2
 Amazon RDS (MySQL)
@@ -54,7 +54,7 @@ MySQL
 Git & GitHub
 Linux / Ubuntu
 
-📌 Project Features
+📌 ##Project Features
 Created a custom AWS VPC
 Created public and private subnets
 Configured Internet Gateway
@@ -64,7 +64,7 @@ Created MySQL database using Amazon RDS
 Connected EC2 Flask application to RDS
 Secured RDS access using Security Groups
 
-🔐 Security Design
+🔐 ##Security Design
 
 The project uses separate Security Groups for EC2 and RDS.
 
@@ -78,7 +78,7 @@ TCP	5000	Internet
 | MySQL    | 3306 | EC2 Security Group |
 
 
-
+##
 aws-vpc-rds-flask-project/
 │
 ├── app.py
@@ -89,24 +89,24 @@ aws-vpc-rds-flask-project/
 └── README.md
 
 
-1. Clone the repository
+##1. Clone the repository
 
 git clone https://github.com/tahir1111-hub/aws-vpc-rds-flask-project.git
 cd aws-vpc-rds-flask-project
 
 
-2. Create a Python virtual environment
+##2. Create a Python virtual environment
 
 python3 -m venv venv
 source venv/bin/activate
 
-3. Install dependencies
+##3. Install dependencies
 
 pip install -r requirements.txt
 
-4. Configure the database
+##4. Configure the database
 
-Create a local config.py file and add your RDS connection details:
+##Create a local config.py file and add your RDS connection details:
 MYSQL_CONFIG = {
     'host': 'YOUR_RDS_ENDPOINT',
     'user': 'YOUR_RDS_USERNAME',
@@ -114,11 +114,11 @@ MYSQL_CONFIG = {
     'port': 3306
 }
 
-5. Run the Flask application
+##5. Run the Flask application
 
 python app.py
 
-6. The application run on
+##6. The application run on
 
 http://0.0.0.0:5000
 
