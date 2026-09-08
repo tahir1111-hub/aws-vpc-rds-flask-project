@@ -1,134 +1,243 @@
-# aws-vpc-rds-flask-project
-aws-vpc-rds-flask-project 
-# AWS VPC + EC2 + RDS + Flask + CloudWatch
+🚀 AWS VPC + RDS + Flask Application
 
-A hands-on AWS project demonstrating how to deploy a Flask application on an EC2 instance, connect it securely to an Amazon RDS MySQL database inside a private subnet, and monitor the EC2 instance using Amazon CloudWatch.
+A production-style AWS cloud deployment project demonstrating how to deploy a Python Flask web application on Amazon EC2, connect it securely to Amazon RDS MySQL, and monitor the infrastructure using Amazon CloudWatch.
 
-## 🏗️ Architecture
+---
 
-```text
-                         Internet
-                            │
-                            ▼
-                   ┌─────────────────┐
-                   │ Internet Gateway│
-                   └────────┬────────┘
-                            │
-                            ▼
-                   ┌─────────────────┐
-                   │   Public Subnet │
-                   │                 │
-                   │  EC2 Instance   │
-                   │  Flask App      │
-                   │  Port: 5000     │
-                   └────────┬────────┘
-                            │
-                       MySQL :3306
-                            │
-                            ▼
-                   ┌─────────────────┐
-                   │  Private Subnet │
-                   │                 │
-                   │   RDS MySQL     │
-                   │   Database      │
-                   └─────────────────┘
+🏗️ Architecture
 
-                     CloudWatch
-                         │
-                         ▼
-                  EC2 Monitoring
+                         🌐 Internet
+                              │
+                              ▼
+                  ┌──────────────────────┐
+                  │  Internet Gateway    │
+                  └──────────┬───────────┘
+                             │
+                             ▼
+                  ┌──────────────────────┐
+                  │    Public Subnet     │
+                  │                      │
+                  │  🖥️ Amazon EC2       │
+                  │  🐍 Flask Application │
+                  │  Port: 5000          │
+                  └──────────┬───────────┘
+                             │
+                        MySQL : 3306
+                             │
+                             ▼
+                  ┌──────────────────────┐
+                  │   Private Subnet     │
+                  │                      │
+                  │  🗄️ Amazon RDS       │
+                  │     MySQL Database   │
+                  └──────────────────────┘
 
 
-🚀## Technologies Used
-AWS VPC
-Amazon EC2
-Amazon RDS (MySQL)
-Amazon CloudWatch
+                    ☁️ CloudWatch
+                          │
+                          ▼
+                   EC2 Monitoring
+
+🔄 Request Flow
+
+User
+ │
+ ▼
 Internet Gateway
-Public & Private Subnets
-Route Tables
-Security Groups
-Python
-Flask
-MySQL
-Git & GitHub
-Linux / Ubuntu
+ │
+ ▼
+Public Subnet
+ │
+ ▼
+EC2 → Flask Application
+ │
+ │ MySQL :3306
+ ▼
+Private Subnet
+ │
+ ▼
+RDS MySQL
 
-📌 ##Project Features
-Created a custom AWS VPC
-Created public and private subnets
-Configured Internet Gateway
-Configured public and private route tables
-Deployed Flask application on EC2
-Created MySQL database using Amazon RDS
-Connected EC2 Flask application to RDS
-Secured RDS access using Security Groups
+---
 
-🔐 ##Security Design
+🛠️ Technologies Used
 
-The project uses separate Security Groups for EC2 and RDS.
+Technology| Purpose
+☁️ AWS VPC| Network isolation
+🖥️ Amazon EC2| Flask application server
+🗄️ Amazon RDS| Managed MySQL database
+📊 Amazon CloudWatch| Monitoring
+🌐 Internet Gateway| Internet connectivity
+🔐 Security Groups| Network security
+🐍 Python| Application development
+🌶️ Flask| Web framework
+🐬 MySQL| Database
+🐧 Linux / Ubuntu| Server environment
+🔧 Git & GitHub| Version control
 
-EC2 Security Group
-Protocol	Port	Source
-SSH	22	My IP
-TCP	5000	Internet
+---
 
-| Protocol | Port | Source             |
-| -------- | ---: | ------------------ |
-| MySQL    | 3306 | EC2 Security Group |
+📌 Project Features
 
+- ✅ Created a custom AWS VPC
+- ✅ Created public and private subnets
+- ✅ Configured an Internet Gateway
+- ✅ Configured public and private route tables
+- ✅ Deployed a Flask application on EC2
+- ✅ Created a MySQL database using Amazon RDS
+- ✅ Connected Flask application to RDS
+- ✅ Secured database access using Security Groups
+- ✅ Configured EC2 monitoring using CloudWatch
 
-##
+---
+
+🔐 Security Design
+
+The architecture uses separate Security Groups for EC2 and RDS.
+
+🖥️ EC2 Security Group
+
+Protocol| Port| Source| Purpose
+SSH| "22"| My IP| Server administration
+TCP| "5000"| Internet| Flask application
+
+🗄️ RDS Security Group
+
+Protocol| Port| Source| Purpose
+MySQL| "3306"| EC2 Security Group| Database connection
+
+«🔒 The RDS database is placed in a private subnet and only accepts MySQL traffic from the EC2 Security Group.»
+
+---
+
+📁 Project Structure
+
 aws-vpc-rds-flask-project/
 │
-├── app.py
-├── requirements.txt
-├── templates/
-│   └── home.html
-├── .gitignore
-└── README.md
+├── 📄 app.py
+├── 📄 requirements.txt
+├── 📁 templates/
+│   └── 📄 home.html
+├── 📄 .gitignore
+└── 📄 README.md
 
+---
 
-##1. Clone the repository
+🚀 Installation & Deployment
+
+1️⃣ Clone the Repository
 
 git clone https://github.com/tahir1111-hub/aws-vpc-rds-flask-project.git
+
 cd aws-vpc-rds-flask-project
 
-
-##2. Create a Python virtual environment
+2️⃣ Create a Python Virtual Environment
 
 python3 -m venv venv
+
 source venv/bin/activate
 
-##3. Install dependencies
+3️⃣ Install Dependencies
 
 pip install -r requirements.txt
 
-##4. Configure the database
+4️⃣ Configure the Database
 
-##Create a local config.py file and add your RDS connection details:
+Create a local "config.py" file and add your RDS connection details:
+
 MYSQL_CONFIG = {
-    'host': 'YOUR_RDS_ENDPOINT',
-    'user': 'YOUR_RDS_USERNAME',
-    'password': 'YOUR_RDS_PASSWORD',
-    'port': 3306
+    "host": "YOUR_RDS_ENDPOINT",
+    "user": "YOUR_RDS_USERNAME",
+    "password": "YOUR_RDS_PASSWORD",
+    "port": 3306
 }
 
-##5. Run the Flask application
+«⚠️ Never commit "config.py" containing real database credentials to GitHub.»
+
+Add it to ".gitignore":
+
+config.py
+venv/
+__pycache__/
+*.pyc
+
+5️⃣ Run the Flask Application
 
 python app.py
 
-##6. The application run on
+6️⃣ Access the Application
 
-http://0.0.0.0:5000
+Open:
+
+http://YOUR_EC2_PUBLIC_IP:5000
+
+---
+
+☁️ AWS Infrastructure
+
+The project demonstrates the following AWS networking architecture:
+
+AWS VPC
+│
+├── 🌐 Public Subnet
+│   └── EC2
+│       └── Flask Application
+│
+├── 🔒 Private Subnet
+│   └── RDS MySQL
+│
+├── 🌐 Internet Gateway
+│
+├── 🛣️ Route Tables
+│   ├── Public Route Table
+│   └── Private Route Table
+│
+└── 🔐 Security Groups
+    ├── EC2 Security Group
+    └── RDS Security Group
+
+---
+
+📊 Monitoring
+
+Amazon CloudWatch is used to monitor the EC2 instance.
+
+Example metrics include:
+
+EC2
+ │
+ └── CloudWatch
+      ├── CPU Utilization
+      ├── Network Traffic
+      ├── Instance Status
+      └── Monitoring Metrics
+
+---
 
 🎯 Project Goal
 
 The goal of this project is to understand how a basic web application can be deployed on AWS using a secure and structured cloud architecture.
 
+This project demonstrates practical knowledge of:
+
+- AWS networking
+- VPC architecture
+- EC2 deployment
+- RDS database connectivity
+- Security Groups
+- Linux server administration
+- Python Flask
+- CloudWatch monitoring
+- Git & GitHub
+
+---
+
 👨‍💻 Author
 
 Tahir
 
-BCA Student | Aspiring Cloud & DevOps Engineer
+"BCA Student | Aspiring Cloud & DevOps Engineer"
 
+---
+
+⭐ If you found this project useful, consider giving the repository a star!
