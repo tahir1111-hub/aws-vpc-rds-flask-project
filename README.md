@@ -91,7 +91,7 @@ aws-vpc-rds-flask-project/
 
 1. Clone the repository
 
-git clone <tahirchhipa1111-commits>
+git clone https://github.com/tahir1111-hub/aws-vpc-rds-flask-project.git
 cd aws-vpc-rds-flask-project
 
 
